@@ -1,0 +1,47 @@
+{
+  "app": {
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.1(13)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/christian/.ohos/config/default_NdkXComponent_HqZE6OR6WPzIQguCGUSV4dpP9bFmZ9S9Mv_jSIIHorU=.cer",
+          "storePassword": "0000001BFCFD28782855890DB034C9AA7F200377596DD14F81BBB6A87A0E6C750D03A4B3FFA74310B195C1",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B1CAFC121DDF960EB0227434949F6BC12C6A789DD533D38897362FC07AD56CE2C921D5577DBF86E",
+          "profile": "/Users/christian/.ohos/config/default_NdkXComponent_HqZE6OR6WPzIQguCGUSV4dpP9bFmZ9S9Mv_jSIIHorU=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/christian/.ohos/config/default_NdkXComponent_HqZE6OR6WPzIQguCGUSV4dpP9bFmZ9S9Mv_jSIIHorU=.p12"
+        }
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "cts",
+      "srcPath": "./cts",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}

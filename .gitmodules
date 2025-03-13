@@ -1,0 +1,3 @@
+[submodule "cts/src/main/cpp/VK-GL-CTS"]
+	path = cts/src/main/cpp/VK-GL-CTS
+	url = https://github.com/austriancoder/VK-GL-CTS.git
