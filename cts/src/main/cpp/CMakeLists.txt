@@ -66,6 +66,7 @@ find_library(
     uv
 )
 
+set(CMAKE_SYSTEM_NAME "Linux")
 add_subdirectory(VK-GL-CTS)
 
 message(${hilog-lib})
