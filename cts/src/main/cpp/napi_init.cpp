@@ -41,10 +41,32 @@ static void CreateDirectory(const std::string& path) {
     }
 }
 
-static void CopyFile(const std::string& src, const std::string& dest) {
-    std::ifstream srcFile(src, std::ios::binary);
+static void CopyFile(NativeResourceManager* mNativeResMg, const std::string& src, const std::string& dest) {
+    RawFile *srcFile = OH_ResourceManager_OpenRawFile(mNativeResMg, src.c_str());
+    if (!srcFile) {
+        throw std::runtime_error("Unable to open source file: " + src);
+    }
+
     std::ofstream destFile(dest, std::ios::binary);
-    destFile << srcFile.rdbuf(); // Copy contents
+    if (!destFile.is_open()) {
+        throw std::runtime_error("Unable to open destination file: " + dest);
+    }
+
+    char buffer[100];
+
+    while (OH_ResourceManager_GetRawFileRemainingLength(srcFile) > 0) {
+        int read = OH_ResourceManager_ReadRawFile(srcFile, buffer, sizeof(buffer));
+
+        if (read == 0)
+            continue;
+
+        destFile.write(buffer, read);
+        if (!destFile.good()) {
+            throw std::runtime_error("Error writing to destination file: " + dest);
+        }
+    }
+
+    OH_ResourceManager_CloseRawFile(srcFile);
 }
 
 void CopyDirectoryStructure(NativeResourceManager* mNativeResMgr, const std::string& srcPath, const std::string& destPath) {
@@ -71,7 +93,7 @@ void CopyDirectoryStructure(NativeResourceManager* mNativeResMgr, const std::str
             CopyDirectoryStructure(mNativeResMgr, fullSrcPath, fullDestPath);
         } else {
             // Copy file
-            CopyFile(fullSrcPath, fullDestPath);
+            CopyFile(mNativeResMgr, fullSrcPath, fullDestPath);
         }
     }
 }
